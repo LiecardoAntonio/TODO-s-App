@@ -1,0 +1,19 @@
+FCC Local Storage -Building TODO App
+
+CONTENT:
+1. Modal in Web Development
+  > A modal is an element that prevents all interaction with elements outside it until the modal has been dismissed.
+  > A modal is a dialog box or popup that appears on top of the main content, often used to gather user input or display important information without navigating away from the current page.
+  > Basically something that happens when something is being interacted by the user, ex: there is a hidden element in HTML, but after u click a certain button the element display shows into the HTML
+
+2. element.classList.toggle("class");
+  > The toggle method will add the class if it is not present on the element, and remove the class if it is present on the element.
+  > ex:
+  element.classList.toggle("class-to-toggle");
+
+3. HTML dialog element 
+  > The HTML <dialog> element is a native HTML element used to create dialog boxes, modals, or popups on a webpage. It provides a built-in way to create dialog windows that can be shown or hidden using simple JavaScript, without needing extra CSS or JavaScript libraries. The <dialog> element is part of the HTML5 specification and has built-in support for handling modal and non-modal dialogs.
+  > The HTML dialog element has a showModal() method that can be used to display a modal dialog box on a web page.
+  > Basically this help u making a hidden element without needing to use style display none and style display block to show it & many other uses.
+  > ex:
+  dialogElement.showModal();

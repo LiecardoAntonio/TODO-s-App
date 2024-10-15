@@ -28,6 +28,14 @@ taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
 })
 
+const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id); // determine whether the task being added to the taskData array already exists or not. If the task does not exist, you will add it to the array. If it does exist, you will update it.
+
+const taskObj = {
+  id: titleInput.value.toLowerCase().split(" ")
+}; //When a user creates a task, it should be saved in an object.
+console.log(taskObj); //check the submitted task
+
+
 
 
 

@@ -17,6 +17,18 @@ let currentTask = {};
 
 openTaskFormBtn.addEventListener('click', () => {taskForm.classList.toggle("hidden")});
 closeTaskFormBtn.addEventListener('click', () => {confirmCloseDialog.showModal()}); //This will display a modal with the Discard and Cancel buttons when the cancel button is clicked.
+cancelBtn.addEventListener('click', ()=>confirmCloseDialog.close()); ////If the user clicks the Cancel button, you want to cancel the process and close the modal so the user can continue editing.
+
+discardBtn.addEventListener('click', () => {
+  confirmCloseDialog.close();
+  taskForm.classList.toggle('hidden');
+}) //If the user clicks the Discard button, you want to close the modal showing the Cancel and Discard buttons, then hide the form modal.
+
+taskForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+})
+
+
 
 
 

@@ -17,3 +17,14 @@ CONTENT:
   > Basically this help u making a hidden element without needing to use style display none and style display block to show it & many other uses.
   > ex:
   dialogElement.showModal();
+
+4. e.preventDefault();
+  > prevent the default behavior of an element when a particular event is triggered.
+  > ex: a 'submit' event has a default behavior which is refreshing the page when the event is triggered.
+  ex code: 
+  taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+  })
+  > learn more about default behavior of an event: https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+
+5. 

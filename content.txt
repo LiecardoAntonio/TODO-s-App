@@ -46,3 +46,8 @@ CONTENT:
   1. Connect compound words: For example, "well-known" or "part-time."
   2. Represent phrases or terms in URLs or filenames: For example, "data-science" or "customer-support."
   3. Join identifiers or code terms: For example, "user-name" or "order-id" in programming contexts.
+
+8. Date.now()
+  > Date.now() returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC.
+  > ex:
+  console.log(Date.now()); // 1628586800000

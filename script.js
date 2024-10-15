@@ -26,14 +26,31 @@ discardBtn.addEventListener('click', () => {
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
+
+  const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id); // determine whether the task being added to the taskData array already exists or not. If the task does not exist, you will add it to the array. If it does exist, you will update it.
+
+  const taskObj = {
+    id: `${titleInput.value.toLowerCase().split(' ').join('-')}-${Date.now()}`, //make a hyphenated string
+    title: titleInput.value,
+    date: dateInput.value,
+    description: descriptionInput.value
+  }; //When a user creates a task, it should be saved in an object.
+  console.log(taskObj); //check the log of submitted task
+
+  if(dataArrIndex === -1) { //if there is no duplicate task
+    taskData.unshift(taskObj); //add the task in the first index of the arr
+  }
+
+  taskData.forEach(({id, title, date, description}) => {
+    tasksContainer.innerHTML += `
+          
+      `
+  }); //display the task on the page by looping through it.
 })
 
-const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id); // determine whether the task being added to the taskData array already exists or not. If the task does not exist, you will add it to the array. If it does exist, you will update it.
 
-const taskObj = {
-  id: titleInput.value.toLowerCase().split(" ")
-}; //When a user creates a task, it should be saved in an object.
-console.log(taskObj); //check the submitted task
+
+
 
 
 

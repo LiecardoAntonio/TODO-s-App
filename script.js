@@ -15,6 +15,27 @@ const descriptionInput = document.getElementById('description-input');
 const taskData = [];
 let currentTask = {};
 
+const deleteTask = (buttonEl) => {
+  const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id) //this will target the parentElement of the buttonEl element, which is the div with class = task, you can see it in the updateTaskContainer function
+  buttonEl.parentElement.remove(); //remove the entire task from the DOM
+  taskData.splice(dataArrIndex, 1); //remove data starting at dataArrIndex and remove only 1 value which is the value at the dataArrIndex itself
+}
+
+const editTask = (buttonEl) => {
+  const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
+};
+
+// reset function to reset the input field, close the taskForm, and empty the currentTask object
+const reset = () => {
+  //reset the input if there is any value on it
+  titleInput.value = '';
+  dateInput.value = '';
+  descriptionInput.value = '';
+
+  taskForm.classList.toggle('hidden');
+  currentTask = {};
+};
+
 openTaskFormBtn.addEventListener('click', () => {taskForm.classList.toggle("hidden")});
 closeTaskFormBtn.addEventListener('click', () => {
   const formInputsContainValues = titleInput.value || dateInput.value || descriptionInput.value; //check if there is any value in the input fields
@@ -46,10 +67,14 @@ const addOrUpdateTask = () => {
   if (dataArrIndex === -1) {
     taskData.unshift(taskObj);
   }
+  console.log(taskData);
+  updateTaskContainer();
+  reset();
 };
 
 //function to add/update the task into the taskContainer
 const updateTaskContainer = () => {
+  tasksContainer.innerHTML = ''; //remove the previous task, so it won't be added to the container again
   taskData.forEach(
     ({ id, title, date, description }) => {
         tasksContainer.innerHTML += `
@@ -57,8 +82,8 @@ const updateTaskContainer = () => {
           <p><strong>Title:</strong> ${title}</p>
           <p><strong>Date:</strong> ${date}</p>
           <p><strong>Description:</strong> ${description}</p>
-          <button type="button" class="btn">Edit</button>
-          <button type="button" class="btn">Delete</button>
+          <button type="button" class="btn" onclick="editTask(this)">Edit</button> 
+          <button type="button" class="btn" onclick="deleteTask(this)">Delete</button> 
         </div>
       `
     }
@@ -98,19 +123,9 @@ taskForm.addEventListener('submit', (e) => {
   //     `
   // }); //display the task on the page by looping through it.
   // taskForm.classList.toggle('hidden');
-  reset();
+  addOrUpdateTask(); // call the add/update function for new task
 })
 
-// reset function to remove the previous task before adding, so it doesn't duplicate
-const reset = () => {
-  //reset the input if there is any value on it
-  titleInput.value = '';
-  dateInput.value = '';
-  descriptionInput.value = '';
-
-  taskForm.classList.toggle('hidden');
-  currentTask = {};
-};
 
 
 

@@ -51,3 +51,45 @@ CONTENT:
   > Date.now() returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC.
   > ex:
   console.log(Date.now()); // 1628586800000
+
+9. (RECALL) onclick attribute on HTML element
+  > add a functionalities when the onclick event happens on that particular element.
+  > ex:
+  <button type="button" class="btn" onclick="editTask(this)">Edit</button> 
+
+10. 'this' keywords
+  > 'this' is a keyword that refers to the current context.
+  > ex use case:
+  <button type="button" class="btn" onclick="editTask(this)">Edit</button> //this will tell which button were to be passed into the function
+
+11. element.parentElement
+  > element.parentElement refers to the parentElement of that element.
+  > ex use case:
+  //HTML:
+  <div class="task" id="${id}">
+          <p><strong>Title:</strong> ${title}</p>
+          <p><strong>Date:</strong> ${date}</p>
+          <p><strong>Description:</strong> ${description}</p>
+          <button type="button" class="btn" onclick="editTask(this)">Edit</button> 
+          <button type="button" class="btn" onclick="deleteTask(this)">Delete</button> 
+  </div>
+  //JS:
+  const deleteTask = (buttonEl) => {
+    const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id)
+  }
+
+12. element.remove();
+  > remove the entire element from the DOM
+
+13. arr.splice(param1, param2, param3);
+  > splice() is an array method that modifies arrays by removing, replacing, or adding elements at a specified index, while also returning the removed elements. It can take up to three arguments: the first one is the mandatory index at which to start, the second is the number of items to remove, and the third is an optional replacement element.
+  > ex:
+  const fruits = ["mango", "date", "cherry", "banana", "apple"];
+
+  // Remove date and cherry from the array starting at index 1
+  const removedFruits = fruits.splice(1, 2);
+
+  console.log(fruits); // [ 'mango', 'banana', 'apple' ]
+  console.log(removedFruits); // [ 'date', 'cherry' ]
+
+14. 

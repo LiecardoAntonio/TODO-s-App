@@ -12,13 +12,17 @@ const dateInput = document.getElementById('date-input');
 const descriptionInput = document.getElementById('description-input');
 
 
-const taskData = [];
+// const taskData = [];
+const taskData = JSON.parse(localStorage.getItem('data')) || []; //get the item if there is a saved task, instead initialize empty array
 let currentTask = {};
+
 
 const deleteTask = (buttonEl) => {
   const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id) //this will target the parentElement of the buttonEl element, which is the div with class = task, you can see it in the updateTaskContainer function
   buttonEl.parentElement.remove(); //remove the entire task from the DOM
   taskData.splice(dataArrIndex, 1); //remove data starting at dataArrIndex and remove only 1 value which is the value at the dataArrIndex itself
+
+  localStorage.setItem('data', JSON.stringify(taskData)); //update the ls so it will also remove the removed task in the ls
 }
 
 const editTask = (buttonEl) => {
@@ -37,6 +41,7 @@ const editTask = (buttonEl) => {
 // reset function to reset the input field, close the taskForm, and empty the currentTask object
 const reset = () => {
   //reset the input if there is any value on it
+  addOrUpdateTaskBtn.innerText = 'Add Task'; //If you try to add a new task, edit that task, and then click on the Add New Task button, you will notice a bug. The form button will display the incorrect text of "Update Task" instead of "Add Task". To fix this, you will need to assign the string "Add Task" to addOrUpdateTaskBtn.innerText inside your reset function.
   titleInput.value = '';
   dateInput.value = '';
   descriptionInput.value = '';
@@ -85,6 +90,8 @@ const addOrUpdateTask = () => {
     taskData[dataArrIndex] = taskObj;
   }
 
+  localStorage.setItem('data', JSON.stringify(taskData)); //save all the task into localStorage
+
   console.log(taskData);
   updateTaskContainer();
   reset();
@@ -107,6 +114,11 @@ const updateTaskContainer = () => {
     }
   );
 };
+
+// if the taskData has value retrieved from the localStorage, then we will update the Task Container so it shows the saved task
+if(taskData.length) {
+  updateTaskContainer();
+}
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -146,20 +158,22 @@ taskForm.addEventListener('submit', (e) => {
 
 
 //testing localStorage
-const myTaskArr = [
-  { task: "Walk the Dog", date: "22-04-2022" },
-  { task: "Read some books", date: "02-11-2023" },
-  { task: "Watch football", date: "10-08-2021" },
-];
-// localStorage.setItem("data", myTaskArr); 
-localStorage.setItem("data", JSON.stringify(myTaskArr)); //saved in string format
-// const getTaskArr = localStorage.getItem('data');
-// console.log(getTaskArr); //because we saved the data in string format the this getTaskArr value will also be a string value
+// const myTaskArr = [
+//   { task: "Walk the Dog", date: "22-04-2022" },
+//   { task: "Read some books", date: "02-11-2023" },
+//   { task: "Watch football", date: "10-08-2021" },
+// ];
+// // localStorage.setItem("data", myTaskArr); 
+// localStorage.setItem("data", JSON.stringify(myTaskArr)); //saved in string format
+// // const getTaskArr = localStorage.getItem('data');
+// // console.log(getTaskArr); //because we saved the data in string format the this getTaskArr value will also be a string value
 
-const getTaskArrObj = JSON.parse(localStorage.getItem('data'));
-console.log(getTaskArrObj); //this will be saved in object again
+// const getTaskArrObj = JSON.parse(localStorage.getItem('data'));
+// console.log(getTaskArrObj); //this will be saved in object again
 
+// // localStorage.removeItem('data'); //remove the specific key item from the localStorage
 
+// // localStorage.clear(); //remove every single item in the ls
 
 
 

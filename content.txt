@@ -117,4 +117,14 @@ CONTENT:
   > ex:
   const getTaskArrObj = JSON.parse(localStorage.getItem('data'));
 
-17. 
+17. localStorage.setItem('key_name', JSON.stringify(item));
+  > set item who already stringified into the ls with the specific key_name as identifiers
+
+18. JSON.parse(localStorage.getItem('key_name'))
+  > get item from the ls with the specific key name and then parse it back to the original data type instead of the naturally string datatype
+
+19. localStorage.removeItem('key_name')
+  > remove an  item with a specific key name from the ls
+
+20. localStorage.clear()
+  > remove all item from the ls

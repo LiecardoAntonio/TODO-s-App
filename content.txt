@@ -92,4 +92,29 @@ CONTENT:
   console.log(fruits); // [ 'mango', 'banana', 'apple' ]
   console.log(removedFruits); // [ 'date', 'cherry' ]
 
-14. 
+14. localStorage
+  > localStorage offers methods for saving, retrieving, and deleting items. The items you save can be of any JavaScript data type.
+  > For instance, the setItem() method is used to save an item, and the getItem() method retrieves the item. To delete a specific item, you can utilize the removeItem() method, or if you want to delete all items in the storage, you can use clear().
+  > ex:
+  localStorage.setItem("key", value); // value could be string, number, or any other data type
+  > ex:
+  const myTaskArr = [
+    { task: "Walk the Dog", date: "22-04-2022" },
+    { task: "Read some books", date: "02-11-2023" },
+    { task: "Watch football", date: "10-08-2021" },
+  ];
+  localStorage.setItem('data', myTaskArr);
+  //After that, open your browser console and go to the Applications tab, select Local Storage, check the key and value inside it and you will find it as a datatype, in this case Object
+  > If you check the "Application" tab of your browser console, you'll notice a series of [object Object]. This is because everything you save in localStorage needs to be in string format.
+
+15. JSON.stringify(variable)
+  > convert any variable we want to store into string, so we can save it to the localStorage
+  > ex:
+  localStorage.setItem("data", JSON.stringify(myTaskArr));
+
+16. JSON.parse(localStorage.getItem('data'));
+  > parse the string we obtain from the localStorage back into its original data type
+  > ex:
+  const getTaskArrObj = JSON.parse(localStorage.getItem('data'));
+
+17. 

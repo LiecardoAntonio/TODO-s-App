@@ -23,6 +23,15 @@ const deleteTask = (buttonEl) => {
 
 const editTask = (buttonEl) => {
   const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
+  const currentTask = taskData[dataArrIndex]; //get the data at the dataArrIndex
+
+  //fill the input field value to the to be edited task value
+  titleInput.value = currentTask.title;
+  dateInput.value = currentTask.date;
+  descriptionInput.value = currentTask.description;
+
+  addOrUpdateTaskBtn.innerText = 'Update Task';
+  taskForm.classList.toggle('hidden');
 };
 
 // reset function to reset the input field, close the taskForm, and empty the currentTask object
@@ -39,8 +48,12 @@ const reset = () => {
 openTaskFormBtn.addEventListener('click', () => {taskForm.classList.toggle("hidden")});
 closeTaskFormBtn.addEventListener('click', () => {
   const formInputsContainValues = titleInput.value || dateInput.value || descriptionInput.value; //check if there is any value in the input fields
+  
+  //If the user attempts to edit a task but decides not to make any changes before closing the form, there is no need to display the modal with the Cancel and Discard buttons.->
+  const formInputValuesUpdated = titleInput.value !== currentTask.title || dateInput.value !== currentTask.date || descriptionInput.value !== currentTask.description; //check if there is any update on the input field value compared to the currenTask
+
   confirmCloseDialog.showModal();
-  if(formInputsContainValues) {
+  if(formInputsContainValues && formInputValuesUpdated) {
     confirmCloseDialog.showModal();
   } else {
     reset(); //if there is a value inside the input then show the confirmation modal
@@ -64,9 +77,14 @@ const addOrUpdateTask = () => {
     description: descriptionInput.value,
   };
   console.log(taskObj);
-  if (dataArrIndex === -1) {
+
+  //add or update condition
+  if (dataArrIndex === -1) { //if the value with the same id not found then add the task
     taskData.unshift(taskObj);
+  } else { //if the value with the same id is found, then update
+    taskData[dataArrIndex] = taskObj;
   }
+
   console.log(taskData);
   updateTaskContainer();
   reset();
@@ -127,6 +145,19 @@ taskForm.addEventListener('submit', (e) => {
 })
 
 
+//testing localStorage
+const myTaskArr = [
+  { task: "Walk the Dog", date: "22-04-2022" },
+  { task: "Read some books", date: "02-11-2023" },
+  { task: "Watch football", date: "10-08-2021" },
+];
+// localStorage.setItem("data", myTaskArr); 
+localStorage.setItem("data", JSON.stringify(myTaskArr)); //saved in string format
+// const getTaskArr = localStorage.getItem('data');
+// console.log(getTaskArr); //because we saved the data in string format the this getTaskArr value will also be a string value
+
+const getTaskArrObj = JSON.parse(localStorage.getItem('data'));
+console.log(getTaskArrObj); //this will be saved in object again
 
 
 
